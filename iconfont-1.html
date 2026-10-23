@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Font Awesome 字体图标标本页 —— 以艺术品牌的方式陈列字体图标">
+    <title>GLYPH ATELIER · Font Awesome 字体图标</title>
+    <link rel="stylesheet" href="cdn/fontawesome/css/all.min.css">
+    <style>
+        :root {
+            --zz_ink: #1b1a17;
+            --zz_ink_soft: #3a3833;
+            --zz_paper: #f5efe4;
+            --zz_paper_deep: #ece4d6;
+            --zz_rust: #bf4a28;
+            --zz_olive: #6d7451;
+            --zz_line: rgba(27, 26, 23, 0.16);
+            --zz_display: Georgia, "Songti SC", "Times New Roman", serif;
+            --zz_text: "Trebuchet MS", "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body.zz_page {
+            margin: 0;
+            color: var(--zz_ink);
+            background-color: var(--zz_paper);
+            background-image:
+                repeating-linear-gradient(90deg, transparent 0 79px, rgba(27, 26, 23, 0.045) 79px 80px),
+                repeating-linear-gradient(0deg, transparent 0 79px, rgba(27, 26, 23, 0.035) 79px 80px),
+                radial-gradient(circle at 12% 8%, rgba(191, 74, 40, 0.1), transparent 32%),
+                radial-gradient(circle at 88% 92%, rgba(109, 116, 81, 0.12), transparent 30%);
+            font-family: var(--zz_text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .zz_topbar,
+        main,
+        .zz_footer {
+            width: min(1180px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        .zz_topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 26px 0 22px;
+            border-bottom: 1px solid var(--zz_line);
+        }
+
+        .zz_brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .zz_brand_seal {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            color: var(--zz_paper);
+            background: var(--zz_ink);
+            border-radius: 2px 14px 2px 14px;
+            font-family: var(--zz_display);
+            font-size: 22px;
+            letter-spacing: 0.02em;
+        }
+
+        .zz_brand_text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.25;
+        }
+
+        .zz_brand_text strong {
+            font-family: var(--zz_display);
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+        }
+
+        .zz_brand_text em {
+            color: var(--zz_rust);
+            font-size: 11px;
+            font-style: normal;
+            letter-spacing: 0.22em;
+        }
+
+        .zz_topnav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .zz_back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border: 1px solid var(--zz_ink);
+            border-radius: 999px;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            transition: color 200ms ease, background 200ms ease;
+        }
+
+        .zz_back:hover,
+        .zz_back:focus-visible {
+            color: var(--zz_paper);
+            background: var(--zz_ink);
+        }
+
+        .zz_hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 40px;
+            align-items: center;
+            padding: 68px 0 74px;
+        }
+
+        .zz_hero_kicker {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--zz_ink_soft);
+            font-size: 11px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .zz_hero_kicker span + span::before {
+            content: "／";
+            margin-right: 16px;
+            color: var(--zz_rust);
+        }
+
+        .zz_hero_title {
+            margin: 26px 0 22px;
+            font-family: var(--zz_display);
+            font-size: clamp(54px, 11vw, 148px);
+            font-weight: 400;
+            line-height: 0.86;
+            letter-spacing: -0.01em;
+        }
+
+        .zz_title_line {
+            display: block;
+        }
+
+        .zz_title_line--outline {
+            margin-left: clamp(20px, 7vw, 96px);
+            color: transparent;
+            -webkit-text-stroke: 1.4px var(--zz_ink);
+            text-stroke: 1.4px var(--zz_ink);
+        }
+
+        .zz_hero_lede {
+            max-width: 470px;
+            margin: 0;
+            color: var(--zz_ink_soft);
+            font-size: 15px;
+        }
+
+        .zz_hero_meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 34px;
+            margin-top: 38px;
+            padding-top: 22px;
+            border-top: 1px solid var(--zz_line);
+        }
+
+        .zz_meta_item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .zz_meta_item strong {
+            font-family: var(--zz_display);
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .zz_meta_item span {
+            color: var(--zz_olive);
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .zz_seal {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 260px;
+            height: 260px;
+            margin-left: auto;
+        }
+
+        .zz_seal_ring {
+            position: absolute;
+            inset: 0;
+            border: 1px dashed rgba(27, 26, 23, 0.4);
+            border-radius: 50%;
+            animation: zz_slow_spin 46s linear infinite;
+        }
+
+        .zz_seal_ring::after {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            width: 11px;
+            height: 11px;
+            background: var(--zz_rust);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .zz_seal_core {
+            display: grid;
+            place-items: center;
+            width: 174px;
+            height: 174px;
+            color: var(--zz_paper);
+            background: var(--zz_ink);
+            border-radius: 50%;
+        }
+
+        .zz_seal_core i {
+            font-size: 58px;
+            transform: rotate(-12deg);
+            transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_seal:hover .zz_seal_core i {
+            transform: rotate(12deg) scale(1.08);
+        }
+
+        .zz_seal_core span {
+            margin-top: -8px;
+            color: var(--zz_paper_deep);
+            font-size: 10px;
+            letter-spacing: 0.3em;
+        }
+
+        @keyframes zz_slow_spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .zz_marquee {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            padding: 16px 0;
+            overflow: hidden;
+            color: var(--zz_paper);
+            background: var(--zz_ink);
+            border-top: 1px solid var(--zz_ink);
+            border-bottom: 1px solid var(--zz_ink);
+        }
+
+        .zz_marquee_track {
+            display: flex;
+            width: max-content;
+            gap: 42px;
+            align-items: center;
+            padding: 6px 0;
+            animation: zz_marquee_move 38s linear infinite;
+        }
+
+        .zz_marquee_track--reverse {
+            animation-direction: reverse;
+            animation-duration: 46s;
+            opacity: 0.55;
+        }
+
+        .zz_marquee:hover .zz_marquee_track {
+            animation-play-state: paused;
+        }
+
+        .zz_marquee_track i {
+            font-size: 22px;
+        }
+
+        .zz_marquee_track span {
+            font-size: 11px;
+            letter-spacing: 0.32em;
+            opacity: 0.72;
+        }
+
+        @keyframes zz_marquee_move {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .zz_section {
+            padding: 78px 0 0;
+        }
+
+        .zz_section_head {
+            display: grid;
+            grid-template-columns: 90px minmax(0, 1fr) minmax(0, 300px);
+            gap: 20px;
+            align-items: end;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--zz_line);
+        }
+
+        .zz_index {
+            color: var(--zz_rust);
+            font-family: var(--zz_display);
+            font-size: 54px;
+            line-height: 0.9;
+        }
+
+        .zz_section_head h2 {
+            margin: 0;
+            font-family: var(--zz_display);
+            font-size: clamp(26px, 3.4vw, 40px);
+            font-weight: 400;
+        }
+
+        .zz_section_head p {
+            margin: 0;
+            color: var(--zz_ink_soft);
+            font-size: 13px;
+        }
+
+        .zz_grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 26px;
+            border-top: 1px solid var(--zz_line);
+            border-left: 1px solid var(--zz_line);
+        }
+
+        .zz_card {
+            position: relative;
+            display: flex;
+            min-height: 176px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 22px 20px 18px;
+            overflow: hidden;
+            border-right: 1px solid var(--zz_line);
+            border-bottom: 1px solid var(--zz_line);
+            background: rgba(255, 253, 248, 0.4);
+            transition: background 260ms ease;
+        }
+
+        .zz_card::after {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, rgba(191, 74, 40, 0.09), transparent 55%);
+            opacity: 0;
+            content: "";
+            transition: opacity 260ms ease;
+        }
+
+        .zz_card:hover::after {
+            opacity: 1;
+        }
+
+        .zz_card i {
+            position: relative;
+            z-index: 1;
+            color: var(--zz_ink);
+            font-size: 34px;
+            transition: color 240ms ease, transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_card:hover i {
+            color: var(--zz_rust);
+            transform: translateY(-4px) rotate(-6deg);
+        }
+
+        .zz_card_meta {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .zz_card_meta b {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .zz_card_meta small {
+            color: var(--zz_olive);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .zz_specimen_row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .zz_specimen_cell {
+            position: relative;
+            display: flex;
+            min-height: 230px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            background: rgba(255, 253, 248, 0.6);
+            border: 1px solid var(--zz_line);
+        }
+
+        .zz_specimen_cell i {
+            transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_specimen_cell:hover i {
+            transform: scale(1.06) rotate(4deg);
+        }
+
+        .zz_specimen_cell figcaption {
+            color: var(--zz_olive);
+            font-size: 10px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .zz_size_xl i {
+            color: var(--zz_rust);
+            font-size: 92px;
+        }
+
+        .zz_size_lg i {
+            font-size: 60px;
+        }
+
+        .zz_size_md i {
+            font-size: 40px;
+        }
+
+        .zz_style_row {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .zz_style_chip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 8px;
+            border: 1px solid var(--zz_line);
+            border-radius: 10px;
+            background: rgba(255, 253, 248, 0.55);
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .zz_style_chip i {
+            font-size: 24px;
+            color: var(--zz_ink_soft);
+        }
+
+        .zz_code_block {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 26px;
+            margin-top: 30px;
+            margin-bottom: 8px;
+        }
+
+        .zz_code {
+            margin: 0;
+            padding: 26px 28px;
+            overflow-x: auto;
+            color: #efe6d6;
+            background: var(--zz_ink);
+            border-radius: 4px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .zz_code .zz_tag {
+            color: #d9906f;
+        }
+
+        .zz_code .zz_attr {
+            color: #cfd6a8;
+        }
+
+        .zz_code_note {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 4px 0;
+        }
+
+        .zz_code_note p {
+            margin: 0;
+            color: var(--zz_ink_soft);
+            font-size: 13px;
+        }
+
+        .zz_code_note strong {
+            display: block;
+            margin-bottom: 8px;
+            font-family: var(--zz_display);
+            font-size: 21px;
+            font-weight: 400;
+        }
+
+        .zz_link_line {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--zz_rust);
+            color: var(--zz_rust);
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .zz_footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 84px;
+            padding: 24px 0 34px;
+            border-top: 1px solid var(--zz_line);
+            color: var(--zz_ink_soft);
+            font-size: 12px;
+        }
+
+        .zz_footer b {
+            font-family: var(--zz_display);
+            font-weight: 400;
+            letter-spacing: 0.14em;
+        }
+
+        .zz_reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_reveal.zz_visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 980px) {
+            .zz_hero {
+                grid-template-columns: minmax(0, 1fr);
+                padding-top: 48px;
+            }
+
+            .zz_seal {
+                display: none;
+            }
+
+            .zz_grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .zz_specimen_row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .zz_size_xl {
+                grid-column: span 2;
+            }
+
+            .zz_style_row {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .zz_code_block {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .zz_topbar,
+            main,
+            .zz_footer {
+                width: calc(100% - 30px);
+            }
+
+            .zz_topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .zz_section_head {
+                grid-template-columns: 56px minmax(0, 1fr);
+            }
+
+            .zz_section_head p {
+                grid-column: 2;
+            }
+
+            .zz_grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .zz_specimen_row {
+                grid-template-columns: 1fr;
+            }
+
+            .zz_size_xl {
+                grid-column: span 1;
+            }
+
+            .zz_style_row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .zz_footer {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 60px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .zz_seal_ring,
+            .zz_marquee_track {
+                animation: none;
+            }
+
+            .zz_reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="zz_page">
+    <header class="zz_topbar">
+        <a class="zz_brand" href="index.html" aria-label="返回课程首页">
+            <span class="zz_brand_seal">G</span>
+            <span class="zz_brand_text">
+                <strong>GLYPH ATELIER</strong>
+                <em>字体图标 · 标本 NO.01</em>
+            </span>
+        </a>
+        <nav class="zz_topnav" aria-label="页面导航">
+            <span>Font Awesome 6.7.2</span>
+            <a class="zz_back" href="index.html">← 返回首页</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="zz_hero" aria-labelledby="zz_hero_title">
+            <div>
+                <div class="zz_hero_kicker">
+                    <span>Advanced Web Design</span>
+                    <span>Font Icon / Local Fonts</span>
+                </div>
+                <h1 class="zz_hero_title" id="zz_hero_title">
+                    <span class="zz_title_line">ICON</span>
+                    <span class="zz_title_line zz_title_line--outline">SPECIMEN</span>
+                </h1>
+                <p class="zz_hero_lede">把图标当成排版材料来陈列。这一页只使用一个字体文件，通过文字的字形、字号与字重，让图标获得和铅字一样的秩序感与呼吸感。</p>
+                <div class="zz_hero_meta">
+                    <div class="zz_meta_item">
+                        <strong>2,000+</strong>
+                        <span>Free Glyphs</span>
+                    </div>
+                    <div class="zz_meta_item">
+                        <strong>3</strong>
+                        <span>Styles</span>
+                    </div>
+                    <div class="zz_meta_item">
+                        <strong>0</strong>
+                        <span>SVG Files</span>
+                    </div>
+                </div>
+            </div>
+            <div class="zz_seal" aria-hidden="true">
+                <div class="zz_seal_ring"></div>
+                <div class="zz_seal_core">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                    <span>FONT / 01</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="zz_marquee" aria-hidden="true">
+            <div class="zz_marquee_track">
+                <span>TYPE IS AN IMAGE</span>
+                <i class="fa-solid fa-feather-pointed"></i>
+                <i class="fa-solid fa-compass-drafting"></i>
+                <span>GLYPH · WEIGHT · RHYTHM</span>
+                <i class="fa-solid fa-palette"></i>
+                <i class="fa-solid fa-atom"></i>
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>ONE FILE, MANY ICONS</span>
+                <i class="fa-solid fa-layer-group"></i>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>TYPE IS AN IMAGE</span>
+                <i class="fa-solid fa-feather-pointed"></i>
+                <i class="fa-solid fa-compass-drafting"></i>
+                <span>GLYPH · WEIGHT · RHYTHM</span>
+                <i class="fa-solid fa-palette"></i>
+                <i class="fa-solid fa-atom"></i>
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>ONE FILE, MANY ICONS</span>
+                <i class="fa-solid fa-layer-group"></i>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <div class="zz_marquee_track zz_marquee_track--reverse">
+                <span>FA-SOLID / FA-REGULAR / FA-BRANDS</span>
+                <i class="fa-regular fa-gem"></i>
+                <i class="fa-regular fa-compass"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-figma"></i>
+                <span>FA-SOLID / FA-REGULAR / FA-BRANDS</span>
+                <i class="fa-regular fa-gem"></i>
+                <i class="fa-regular fa-compass"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-figma"></i>
+            </div>
+        </div>
+
+        <section class="zz_section" id="zz_gallery" aria-labelledby="zz_gallery_title">
+            <div class="zz_section_head zz_reveal">
+                <span class="zz_index">01</span>
+                <h2 id="zz_gallery_title">图标陈列 / Gallery</h2>
+                <p>二十四个字形，三种风格。鼠标移入时，图标会像铅字一样被轻轻抬起。</p>
+            </div>
+            <div class="zz_grid">
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                    <div class="zz_card_meta"><b>feather-pointed</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                    <div class="zz_card_meta"><b>compass-drafting</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-pen-nib"></i>
+                    <div class="zz_card_meta"><b>pen-nib</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-palette"></i>
+                    <div class="zz_card_meta"><b>palette</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <div class="zz_card_meta"><b>layer-group</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-atom"></i>
+                    <div class="zz_card_meta"><b>atom</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <div class="zz_card_meta"><b>wand-magic-sparkles</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <div class="zz_card_meta"><b>hourglass-half</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-infinity"></i>
+                    <div class="zz_card_meta"><b>infinity</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-scissors"></i>
+                    <div class="zz_card_meta"><b>scissors</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-cube"></i>
+                    <div class="zz_card_meta"><b>cube</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-leaf"></i>
+                    <div class="zz_card_meta"><b>leaf</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-bolt"></i>
+                    <div class="zz_card_meta"><b>bolt</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-fish"></i>
+                    <div class="zz_card_meta"><b>fish</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-dove"></i>
+                    <div class="zz_card_meta"><b>dove</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-solid fa-crow"></i>
+                    <div class="zz_card_meta"><b>crow</b><small>Solid</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-regular fa-gem"></i>
+                    <div class="zz_card_meta"><b>gem</b><small>Regular</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-regular fa-clock"></i>
+                    <div class="zz_card_meta"><b>clock</b><small>Regular</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-regular fa-envelope"></i>
+                    <div class="zz_card_meta"><b>envelope</b><small>Regular</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-regular fa-compass"></i>
+                    <div class="zz_card_meta"><b>compass</b><small>Regular</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-brands fa-github"></i>
+                    <div class="zz_card_meta"><b>github</b><small>Brands</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-brands fa-figma"></i>
+                    <div class="zz_card_meta"><b>figma</b><small>Brands</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-brands fa-dribbble"></i>
+                    <div class="zz_card_meta"><b>dribbble</b><small>Brands</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="fa-brands fa-codepen"></i>
+                    <div class="zz_card_meta"><b>codepen</b><small>Brands</small></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="zz_section" id="zz_specimen" aria-labelledby="zz_specimen_title">
+            <div class="zz_section_head zz_reveal">
+                <span class="zz_index">02</span>
+                <h2 id="zz_specimen_title">尺寸标本 / Scale</h2>
+                <p>字体图标的优势在于尺寸即字号。同一份文件，从 40px 放大到 92px，边缘依旧干净。</p>
+            </div>
+            <div class="zz_specimen_row">
+                <figure class="zz_specimen_cell zz_size_xl zz_reveal">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                    <figcaption>font-size: 92px</figcaption>
+                </figure>
+                <figure class="zz_specimen_cell zz_size_lg zz_reveal">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                    <figcaption>font-size: 60px</figcaption>
+                </figure>
+                <figure class="zz_specimen_cell zz_size_md zz_reveal">
+                    <i class="fa-brands fa-figma"></i>
+                    <figcaption>font-size: 40px</figcaption>
+                </figure>
+            </div>
+            <div class="zz_style_row">
+                <div class="zz_style_chip zz_reveal"><i class="fa-solid fa-star"></i><span>Solid 900</span></div>
+                <div class="zz_style_chip zz_reveal"><i class="fa-regular fa-star"></i><span>Regular 400</span></div>
+                <div class="zz_style_chip zz_reveal"><i class="fa-brands fa-github"></i><span>Brands 400</span></div>
+                <div class="zz_style_chip zz_reveal"><i class="fa-solid fa-heart"></i><span>Heart / Solid</span></div>
+                <div class="zz_style_chip zz_reveal"><i class="fa-regular fa-heart"></i><span>Heart / Regular</span></div>
+                <div class="zz_style_chip zz_reveal"><i class="fa-brands fa-spotify"></i><span>Brands / Spotify</span></div>
+            </div>
+        </section>
+
+        <section class="zz_section" id="zz_code" aria-labelledby="zz_code_title">
+            <div class="zz_section_head zz_reveal">
+                <span class="zz_index">03</span>
+                <h2 id="zz_code_title">写法 / Usage</h2>
+                <p>引入本地字体文件后，图标就是一个带 class 的标签，不需要任何图片请求。</p>
+            </div>
+            <div class="zz_code_block">
+                <pre class="zz_code zz_reveal"><code><span class="zz_tag">&lt;link</span> <span class="zz_attr">rel</span>="stylesheet" <span class="zz_attr">href</span>="cdn/fontawesome/css/all.min.css"<span class="zz_tag">&gt;</span>
+
+<span class="zz_tag">&lt;i</span> <span class="zz_attr">class</span>="fa-solid fa-feather-pointed"<span class="zz_tag">&gt;&lt;/i&gt;</span>
+<span class="zz_tag">&lt;i</span> <span class="zz_attr">class</span>="fa-regular fa-gem"<span class="zz_tag">&gt;&lt;/i&gt;</span>
+<span class="zz_tag">&lt;i</span> <span class="zz_attr">class</span>="fa-brands fa-figma"<span class="zz_tag">&gt;&lt;/i&gt;</span></code></pre>
+                <div class="zz_code_note zz_reveal">
+                    <div>
+                        <strong>字体图标的三件套</strong>
+                        <p>字体文件 .woff2、样式表 .css、以及一个带对 class 的标签。三者齐备，图标即文字，颜色跟随 color，大小跟随 font-size。</p>
+                    </div>
+                    <a class="zz_link_line" href="iconfont-2.html">切换到 Lucide · SVG 版 →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="zz_footer">
+        <b>GLYPH ATELIER / FONT AWESOME</b>
+        <span>朱禹同 · 高级网页设计 · 图标字体标本 No.01</span>
+    </footer>
+
+    <script>
+        (function () {
+            var zz_revealItems = document.querySelectorAll(".zz_reveal");
+            var zz_reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (zz_reduceMotion || !("IntersectionObserver" in window)) {
+                zz_revealItems.forEach(function (zz_item) {
+                    zz_item.classList.add("zz_visible");
+                });
+                return;
+            }
+
+            var zz_observer = new IntersectionObserver(function (zz_entries) {
+                zz_entries.forEach(function (zz_entry) {
+                    if (zz_entry.isIntersecting) {
+                        var zz_delay = Array.prototype.indexOf.call(zz_revealItems, zz_entry.target) % 8;
+                        zz_entry.target.style.transitionDelay = zz_delay * 55 + "ms";
+                        zz_entry.target.classList.add("zz_visible");
+                        zz_observer.unobserve(zz_entry.target);
+                    }
+                });
+            }, { threshold: 0.16, rootMargin: "0px 0px -40px 0px" });
+
+            zz_revealItems.forEach(function (zz_item) {
+                zz_observer.observe(zz_item);
+            });
+        })();
+    </script>
+</body>
+</html>

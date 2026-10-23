@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="iconfont 字体图标 · 移动端固定底部导航标本">
+    <title>TAB STUDIO · iconfont 字体图标 · 移动端底部导航</title>
+    <link rel="stylesheet" href="font/iconfont.css">
+    <style>
+        :root {
+            --zz_ink: #1b1a17;
+            --zz_ink_soft: #3a3833;
+            --zz_paper: #f5efe4;
+            --zz_paper_deep: #ece4d6;
+            --zz_rust: #c4541f;
+            --zz_rust_soft: #e88a60;
+            --zz_olive: #6d7451;
+            --zz_line: rgba(27, 26, 23, 0.12);
+            --zz_active_bg: rgba(196, 84, 31, 0.1);
+            --zz_badge_bg: #e23b3b;
+            --zz_badge_text: #ffffff;
+            --zz_dot_bg: #e23b3b;
+            --zz_tab_h: 72px;
+            --zz_display: Georgia, "Songti SC", "Times New Roman", serif;
+            --zz_text: "Trebuchet MS", "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: var(--zz_paper_deep);
+            font-family: var(--zz_text);
+            color: var(--zz_ink);
+            overscroll-behavior: none;
+        }
+
+        body.zz_page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* 手机容器 */
+        .zz_phone {
+            width: 100%;
+            max-width: 420px;
+            min-height: 100vh;
+            background: var(--zz_paper);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 60px rgba(27, 26, 23, 0.08);
+        }
+
+        /* 顶部状态栏 */
+        .zz_status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--zz_ink);
+        }
+
+        .zz_status .zz_time { font-family: var(--zz_display); font-size: 14px; }
+
+        /* 顶栏 */
+        .zz_topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 24px 18px;
+        }
+
+        .zz_brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .zz_brand_seal {
+            width: 34px;
+            height: 34px;
+            background: var(--zz_ink);
+            color: var(--zz_paper);
+            display: grid;
+            place-items: center;
+            font-family: var(--zz_display);
+            font-size: 16px;
+            border-radius: 2px 10px 2px 10px;
+        }
+
+        .zz_brand_text {
+            font-family: var(--zz_display);
+            font-size: 15px;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+        }
+
+        .zz_brand_text em {
+            display: block;
+            font-style: normal;
+            color: var(--zz_rust);
+            font-size: 9px;
+            letter-spacing: 0.22em;
+            margin-top: 2px;
+        }
+
+        .zz_back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1px solid var(--zz_ink);
+            border-radius: 999px;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: inherit;
+            transition: background 180ms ease, color 180ms ease;
+        }
+
+        .zz_back:hover { background: var(--zz_ink); color: var(--zz_paper); }
+
+        /* 内容区 —— 可切换 */
+        .zz_content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: calc(var(--zz_tab_h) + 32px);
+        }
+
+        .zz_panel { display: none; padding: 0 24px; }
+        .zz_panel.zz_active { display: block; }
+
+        /* 首页 panel */
+        .zz_hero_title {
+            font-family: var(--zz_display);
+            font-size: 42px;
+            line-height: 0.95;
+            margin: 18px 0 6px;
+        }
+
+        .zz_hero_title .zz_outline {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--zz_rust);
+            margin-left: 30px;
+        }
+
+        .zz_hero_lede {
+            color: var(--zz_ink_soft);
+            font-size: 13px;
+            margin: 0 0 22px;
+            max-width: 280px;
+        }
+
+        .zz_hero_card {
+            position: relative;
+            border: 1px solid var(--zz_line);
+            padding: 24px;
+            margin-bottom: 16px;
+            background: linear-gradient(160deg, rgba(196, 84, 31, 0.08), transparent 60%);
+        }
+
+        .zz_hero_card h3 {
+            margin: 0 0 8px;
+            font-family: var(--zz_display);
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .zz_hero_card p { margin: 0; font-size: 12px; color: var(--zz_ink_soft); }
+
+        .zz_list { margin-top: 18px; }
+
+        .zz_list_item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--zz_line);
+            font-size: 13px;
+        }
+
+        .zz_list_item .zz_thumb {
+            width: 42px;
+            height: 42px;
+            background: var(--zz_paper_deep);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            color: var(--zz_rust);
+            font-size: 18px;
+            font-family: var(--zz_display);
+        }
+
+        .zz_list_item strong { display: block; font-size: 13px; font-weight: 500; }
+        .zz_list_item span { color: var(--zz_ink_soft); font-size: 11px; }
+
+        /* 收藏 panel */
+        .zz_empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--zz_ink_soft);
+        }
+
+        .zz_empty .iconfont {
+            font-size: 52px;
+            color: var(--zz_rust);
+            opacity: 0.7;
+        }
+
+        .zz_empty p { margin-top: 12px; font-size: 13px; }
+
+        /* 购物车 panel */
+        .zz_cart_item {
+            display: flex;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--zz_line);
+        }
+
+        .zz_cart_thumb {
+            width: 58px;
+            height: 58px;
+            background: var(--zz_paper_deep);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            color: var(--zz_olive);
+            font-family: var(--zz_display);
+            font-size: 22px;
+        }
+
+        .zz_cart_info { flex: 1; }
+        .zz_cart_info strong { display: block; font-size: 13px; margin-bottom: 4px; }
+        .zz_cart_info small { color: var(--zz_ink_soft); font-size: 11px; }
+        .zz_cart_info b { color: var(--zz_rust); font-size: 14px; font-weight: 600; }
+
+        /* 我的 panel */
+        .zz_profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 28px 0 22px;
+        }
+
+        .zz_avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--zz_ink);
+            color: var(--zz_paper);
+            display: grid;
+            place-items: center;
+            font-family: var(--zz_display);
+            font-size: 24px;
+        }
+
+        .zz_profile h3 { margin: 0; font-family: var(--zz_display); font-size: 22px; font-weight: 400; }
+        .zz_profile p { margin: 4px 0 0; color: var(--zz_olive); font-size: 12px; letter-spacing: 0.12em; }
+
+        .zz_stat_row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 18px 0;
+            border: 1px solid var(--zz_line);
+        }
+
+        .zz_stat {
+            padding: 14px 8px;
+            text-align: center;
+            border-right: 1px solid var(--zz_line);
+        }
+        .zz_stat:last-child { border-right: none; }
+        .zz_stat strong { display: block; font-family: var(--zz_display); font-size: 22px; }
+        .zz_stat span { font-size: 10px; letter-spacing: 0.2em; color: var(--zz_olive); }
+
+        /* 底部 tab bar */
+        .zz_tabbar {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 100%;
+            max-width: 420px;
+            height: calc(var(--zz_tab_h) + env(safe-area-inset-bottom));
+            padding-bottom: env(safe-area-inset-bottom);
+            background: var(--zz_paper);
+            border-top: 1px solid var(--zz_line);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            z-index: 50;
+            box-shadow: 0 -4px 20px rgba(27, 26, 23, 0.06);
+        }
+
+        .zz_tab {
+            flex: 1;
+            height: var(--zz_tab_h);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            text-decoration: none;
+            color: var(--zz_ink_soft);
+            position: relative;
+            cursor: pointer;
+            transition: color 200ms ease;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .zz_tab .zz_tab_icon {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+        }
+
+        .zz_tab .zz_tab_icon .iconfont {
+            font-size: 24px;
+            transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1), color 200ms ease;
+        }
+
+        .zz_tab .zz_tab_label {
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: opacity 200ms ease;
+        }
+
+        /* Active 状态 */
+        .zz_tab.zz_active {
+            color: var(--zz_rust);
+        }
+
+        .zz_tab.zz_active .zz_tab_icon .iconfont {
+            transform: translateY(-2px) scale(1.08);
+        }
+
+        .zz_tab.zz_active .zz_tab_label {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        /* Active 圆点指示器 */
+        .zz_tab.zz_active::before {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--zz_rust);
+            border-radius: 50%;
+        }
+
+        /* 数字徽章 —— 购物车 */
+        .zz_badge {
+            position: absolute;
+            top: -2px;
+            right: -4px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: var(--zz_badge_bg);
+            color: var(--zz_badge_text);
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 700;
+            display: grid;
+            place-items: center;
+            line-height: 1;
+            box-shadow: 0 0 0 2px var(--zz_paper);
+            animation: zz_badge_pop 480ms cubic-bezier(0.2, 1.4, 0.4, 1);
+        }
+
+        @keyframes zz_badge_pop {
+            0%   { transform: scale(0); }
+            60%  { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* 红点 —— 收藏 */
+        .zz_dot {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            background: var(--zz_dot_bg);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--zz_paper);
+            animation: zz_dot_pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes zz_dot_pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.6; transform: scale(0.85); }
+        }
+
+        /* 底部 margin 文本 */
+        .zz_foot {
+            text-align: center;
+            padding: 20px 24px 88px;
+            font-size: 10px;
+            color: var(--zz_olive);
+            letter-spacing: 0.2em;
+        }
+
+        @media (min-width: 421px) {
+            body.zz_page {
+                background:
+                    repeating-linear-gradient(90deg, transparent 0 79px, rgba(27, 26, 23, 0.035) 79px 80px),
+                    repeating-linear-gradient(0deg, transparent 0 79px, rgba(27, 26, 23, 0.025) 79px 80px);
+            }
+            .zz_phone {
+                margin: 24px 0;
+                min-height: calc(100vh - 48px);
+                border-radius: 28px;
+                overflow: hidden;
+                border: 1px solid rgba(27, 26, 23, 0.12);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .zz_badge, .zz_dot { animation: none; }
+            .zz_tab.zz_active .zz_tab_icon .iconfont { transform: none; }
+            *, *::before, *::after { transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body class="zz_page">
+    <div class="zz_phone">
+        <div class="zz_status">
+            <span class="zz_time">9:41</span>
+            <span>●●●●● 5G</span>
+        </div>
+
+        <header class="zz_topbar">
+            <a class="zz_brand" href="index.html" aria-label="返回首页">
+                <span class="zz_brand_seal">T</span>
+                <span class="zz_brand_text">TAB STUDIO<em>ICONFONT · NO.03</em></span>
+            </a>
+            <a class="zz_back" href="index.html">← 首页</a>
+        </header>
+
+        <main class="zz_content">
+            <!-- 首页 -->
+            <section class="zz_panel zz_active" data-tab="home">
+                <h1 class="zz_hero_title">HOME<span class="zz_outline">PANEL</span></h1>
+                <p class="zz_hero_lede">这是 tab bar 默认选中的第一个面板。点击底部导航可以切换不同的内容。</p>
+
+                <div class="zz_hero_card">
+                    <h3>今日推荐</h3>
+                    <p>把底部导航的四个图标，对应到四个完全不同的内容面板里。每个面板里可以放列表、表单、统计，或者什么都不放。</p>
+                </div>
+
+                <div class="zz_list">
+                    <div class="zz_list_item">
+                        <div class="zz_thumb">01</div>
+                        <div>
+                            <strong>字体图标是文字</strong>
+                            <span>改变 font-size 就能缩放</span>
+                        </div>
+                    </div>
+                    <div class="zz_list_item">
+                        <div class="zz_thumb">02</div>
+                        <div>
+                            <strong>徽章是绝对定位</strong>
+                            <span>右上角红点或数字</span>
+                        </div>
+                    </div>
+                    <div class="zz_list_item">
+                        <div class="zz_thumb">03</div>
+                        <div>
+                            <strong>tab bar 固定在底部</strong>
+                            <span>position: fixed; bottom: 0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 收藏 -->
+            <section class="zz_panel" data-tab="fav">
+                <h1 class="zz_hero-title" style="font-family: var(--zz_display); font-size: 42px; line-height: 0.95; margin: 18px 0 22px;">FAVORITES<span class="zz_outline" style="display:block; color:transparent; -webkit-text-stroke:1px var(--zz_rust); margin-left:30px;">PANEL</span></h1>
+                <div class="zz_empty">
+                    <i class="iconfont icon-shoucang"></i>
+                    <p>这里是空的。<br>但红点会一直在。</p>
+                </div>
+            </section>
+
+            <!-- 购物车 -->
+            <section class="zz_panel" data-tab="cart">
+                <h1 class="zz_hero-title" style="font-family: var(--zz_display); font-size: 42px; line-height: 0.95; margin: 18px 0 22px;">CART<span class="zz_outline" style="display:block; color:transparent; -webkit-text-stroke:1px var(--zz_rust); margin-left:30px;">PANEL</span></h1>
+
+                <div class="zz_cart_item">
+                    <div class="zz_cart_thumb">A</div>
+                    <div class="zz_cart_info">
+                        <strong>商品 Alpha</strong>
+                        <small>数量 × 1</small>
+                        <b>¥ 168.00</b>
+                    </div>
+                </div>
+                <div class="zz_cart_item">
+                    <div class="zz_cart_thumb">B</div>
+                    <div class="zz_cart_info">
+                        <strong>商品 Beta</strong>
+                        <small>数量 × 2</small>
+                        <b>¥ 88.00</b>
+                    </div>
+                </div>
+                <div class="zz_cart_item">
+                    <div class="zz_cart_thumb">C</div>
+                    <div class="zz_cart_info">
+                        <strong>商品 Gamma</strong>
+                        <small>数量 × 1</small>
+                        <b>¥ 238.00</b>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 我的 -->
+            <section class="zz_panel" data-tab="me">
+                <div class="zz_profile">
+                    <div class="zz_avatar">Z</div>
+                    <div>
+                        <h3>朱禹同</h3>
+                        <p>COURSE · ADVANCED WEB</p>
+                    </div>
+                </div>
+
+                <div class="zz_stat_row">
+                    <div class="zz_stat"><strong>12</strong><span>ORDER</span></div>
+                    <div class="zz_stat"><strong>3</strong><span>FAV</span></div>
+                    <div class="zz_stat"><strong>98</strong><span>POINTS</span></div>
+                </div>
+
+                <div class="zz_list">
+                    <div class="zz_list_item"><div class="zz_thumb">⚙</div><div><strong>设置</strong><span>账号 · 通知 · 隐私</span></div></div>
+                    <div class="zz_list_item"><div class="zz_thumb">✉</div><div><strong>消息</strong><span>系统 · 互动 · 活动</span></div></div>
+                    <div class="zz_list_item"><div class="zz_thumb">?</div><div><strong>帮助</strong><span>FAQ · 意见反馈</span></div></div>
+                </div>
+            </section>
+
+            <div class="zz_foot">TAB STUDIO · ICONFONT · LOCAL FONTS</div>
+        </main>
+
+        <!-- 底部 tab bar -->
+        <nav class="zz_tabbar" aria-label="底部导航">
+            <button class="zz_tab zz_active" data-target="home">
+                <span class="zz_tab_icon">
+                    <i class="iconfont icon-shouye"></i>
+                </span>
+                <span class="zz_tab_label">HOME</span>
+            </button>
+
+            <button class="zz_tab" data-target="fav">
+                <span class="zz_tab_icon">
+                    <i class="iconfont icon-shoucang"></i>
+                    <span class="zz_dot" aria-label="有新收藏"></span>
+                </span>
+                <span class="zz_tab_label">FAV</span>
+            </button>
+
+            <button class="zz_tab" data-target="cart">
+                <span class="zz_tab_icon">
+                    <i class="iconfont icon-gouwuche"></i>
+                    <span class="zz_badge" aria-label="3 件商品">3</span>
+                </span>
+                <span class="zz_tab_label">CART</span>
+            </button>
+
+            <button class="zz_tab" data-target="me">
+                <span class="zz_tab_icon">
+                    <i class="iconfont icon-wode"></i>
+                </span>
+                <span class="zz_tab_label">ME</span>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        (function () {
+            var zz_tabs = document.querySelectorAll('.zz_tab');
+            var zz_panels = document.querySelectorAll('.zz_panel');
+
+            zz_tabs.forEach(function (zz_tab) {
+                zz_tab.addEventListener('click', function () {
+                    var zz_target = zz_tab.getAttribute('data-target');
+
+                    zz_tabs.forEach(function (zz_t) { zz_t.classList.remove('zz_active'); });
+                    zz_tab.classList.add('zz_active');
+
+                    zz_panels.forEach(function (zz_p) {
+                        zz_p.classList.toggle('zz_active', zz_p.getAttribute('data-tab') === zz_target);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

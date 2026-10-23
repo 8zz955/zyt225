@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lucide SVG 线性图标标本页 —— 以艺术品牌的方式陈列 SVG 图标">
+    <title>LINE ATELIER · Lucide SVG 图标</title>
+    <style>
+        :root {
+            --zz_night: #15160f;
+            --zz_night_soft: #1d1f16;
+            --zz_bone: #efe8d8;
+            --zz_bone_dim: #b9b2a1;
+            --zz_sage: #a8b08a;
+            --zz_clay: #cf7a4e;
+            --zz_line: rgba(239, 232, 216, 0.15);
+            --zz_line_strong: rgba(239, 232, 216, 0.34);
+            --zz_sw: 1.5;
+            --zz_display: Georgia, "Songti SC", "Times New Roman", serif;
+            --zz_text: "Trebuchet MS", "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body.zz_page {
+            margin: 0;
+            color: var(--zz_bone);
+            background-color: var(--zz_night);
+            background-image:
+                radial-gradient(circle at 78% 6%, rgba(207, 122, 78, 0.16), transparent 34%),
+                radial-gradient(circle at 12% 88%, rgba(168, 176, 138, 0.14), transparent 32%),
+                repeating-linear-gradient(90deg, transparent 0 99px, rgba(239, 232, 216, 0.05) 99px 100px),
+                repeating-linear-gradient(0deg, transparent 0 99px, rgba(239, 232, 216, 0.04) 99px 100px);
+            font-family: var(--zz_text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .zz_topbar,
+        main,
+        .zz_footer {
+            width: min(1180px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        .zz_topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 26px 0 22px;
+            border-bottom: 1px solid var(--zz_line);
+        }
+
+        .zz_brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .zz_brand_seal {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            color: var(--zz_night);
+            background: var(--zz_bone);
+            border-radius: 14px 2px 14px 2px;
+            font-family: var(--zz_display);
+            font-size: 22px;
+        }
+
+        .zz_brand_text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.25;
+        }
+
+        .zz_brand_text strong {
+            font-family: var(--zz_display);
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+        }
+
+        .zz_brand_text em {
+            color: var(--zz_clay);
+            font-size: 11px;
+            font-style: normal;
+            letter-spacing: 0.22em;
+        }
+
+        .zz_topnav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            color: var(--zz_bone_dim);
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .zz_back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            color: var(--zz_bone);
+            border: 1px solid var(--zz_line_strong);
+            border-radius: 999px;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            transition: color 200ms ease, background 200ms ease, border-color 200ms ease;
+        }
+
+        .zz_back:hover,
+        .zz_back:focus-visible {
+            color: var(--zz_night);
+            background: var(--zz_bone);
+            border-color: var(--zz_bone);
+        }
+
+        .zz_hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 40px;
+            align-items: center;
+            padding: 70px 0 76px;
+        }
+
+        .zz_hero_kicker {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--zz_bone_dim);
+            font-size: 11px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .zz_hero_kicker span + span::before {
+            content: "／";
+            margin-right: 16px;
+            color: var(--zz_clay);
+        }
+
+        .zz_hero_title {
+            margin: 26px 0 22px;
+            font-family: var(--zz_display);
+            font-size: clamp(54px, 11vw, 148px);
+            font-weight: 400;
+            line-height: 0.86;
+        }
+
+        .zz_title_line {
+            display: block;
+        }
+
+        .zz_title_line--outline {
+            margin-left: clamp(20px, 7vw, 96px);
+            color: transparent;
+            -webkit-text-stroke: 1.2px var(--zz_sage);
+            text-stroke: 1.2px var(--zz_sage);
+        }
+
+        .zz_hero_lede {
+            max-width: 480px;
+            margin: 0;
+            color: var(--zz_bone_dim);
+            font-size: 15px;
+        }
+
+        .zz_hero_meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 34px;
+            margin-top: 38px;
+            padding-top: 22px;
+            border-top: 1px solid var(--zz_line);
+        }
+
+        .zz_meta_item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .zz_meta_item strong {
+            font-family: var(--zz_display);
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .zz_meta_item span {
+            color: var(--zz_sage);
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .zz_seal {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 250px;
+            height: 250px;
+            margin-left: auto;
+        }
+
+        .zz_seal_ring {
+            position: absolute;
+            inset: 0;
+            border: 1px dashed rgba(239, 232, 216, 0.32);
+            border-radius: 50%;
+            animation: zz_slow_spin 52s linear infinite;
+        }
+
+        .zz_seal_ring::after {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: var(--zz_sage);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .zz_seal_core {
+            display: grid;
+            place-items: center;
+            width: 168px;
+            height: 168px;
+            color: var(--zz_night);
+            background: var(--zz_bone);
+            border-radius: 50%;
+            transition: border-radius 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_seal:hover .zz_seal_core {
+            border-radius: 34% 66% 58% 42% / 46% 38% 62% 54%;
+        }
+
+        .zz_seal_core svg {
+            width: 56px;
+            height: 56px;
+            stroke-width: 1.1;
+            transform: rotate(-10deg);
+            transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_seal:hover .zz_seal_core svg {
+            transform: rotate(10deg) scale(1.08);
+        }
+
+        .zz_seal_core span {
+            margin-top: -6px;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+        }
+
+        @keyframes zz_slow_spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .zz_band {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 15px 0;
+            border-top: 1px solid var(--zz_line);
+            border-bottom: 1px solid var(--zz_line);
+            color: var(--zz_bone_dim);
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .zz_band svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 1.4;
+            color: var(--zz_sage);
+        }
+
+        .zz_section {
+            padding: 78px 0 0;
+        }
+
+        .zz_section_head {
+            display: grid;
+            grid-template-columns: 90px minmax(0, 1fr) minmax(0, 300px);
+            gap: 20px;
+            align-items: end;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--zz_line);
+        }
+
+        .zz_index {
+            color: var(--zz_clay);
+            font-family: var(--zz_display);
+            font-size: 54px;
+            line-height: 0.9;
+        }
+
+        .zz_section_head h2 {
+            margin: 0;
+            font-family: var(--zz_display);
+            font-size: clamp(26px, 3.4vw, 40px);
+            font-weight: 400;
+        }
+
+        .zz_section_head p {
+            margin: 0;
+            color: var(--zz_bone_dim);
+            font-size: 13px;
+        }
+
+        .zz_grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .zz_card {
+            position: relative;
+            display: flex;
+            min-height: 168px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 22px 20px 18px;
+            border: 1px solid var(--zz_line);
+            background: rgba(239, 232, 216, 0.03);
+            transition: border-color 260ms ease, background 260ms ease, transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_card::before,
+        .zz_card::after {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--zz_sage);
+            border-style: solid;
+            opacity: 0;
+            content: "";
+            transition: opacity 260ms ease;
+        }
+
+        .zz_card::before {
+            top: -1px;
+            left: -1px;
+            border-width: 1px 0 0 1px;
+        }
+
+        .zz_card::after {
+            right: -1px;
+            bottom: -1px;
+            border-width: 0 1px 1px 0;
+        }
+
+        .zz_card:hover {
+            background: rgba(239, 232, 216, 0.07);
+            border-color: var(--zz_line_strong);
+            transform: translateY(-5px);
+        }
+
+        .zz_card:hover::before,
+        .zz_card:hover::after {
+            opacity: 1;
+        }
+
+        .zz_card svg {
+            width: 34px;
+            height: 34px;
+            color: var(--zz_bone);
+            stroke-width: var(--zz_sw);
+            transition: color 240ms ease, transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_card:hover svg {
+            color: var(--zz_clay);
+            transform: rotate(-8deg);
+        }
+
+        .zz_card_meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .zz_card_meta b {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .zz_card_meta small {
+            color: var(--zz_sage);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .zz_lab {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+            gap: 26px;
+            margin-top: 30px;
+        }
+
+        .zz_lab_stage {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 320px;
+            overflow: hidden;
+            border: 1px solid var(--zz_line);
+            background:
+                linear-gradient(135deg, rgba(239, 232, 216, 0.06), transparent 60%),
+                var(--zz_night_soft);
+        }
+
+        .zz_lab_stage::after {
+            position: absolute;
+            inset: 14px;
+            border: 1px dashed rgba(168, 176, 138, 0.28);
+            content: "";
+            pointer-events: none;
+        }
+
+        .zz_lab_stage svg {
+            width: 112px;
+            height: 112px;
+            color: var(--zz_bone);
+            stroke-width: var(--zz_sw);
+            transition: color 300ms ease;
+        }
+
+        .zz_lab_stage:hover svg {
+            color: var(--zz_sage);
+        }
+
+        .zz_lab_panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 22px;
+            padding: 26px;
+            border: 1px solid var(--zz_line);
+        }
+
+        .zz_lab_panel h3 {
+            margin: 0 0 8px;
+            font-family: var(--zz_display);
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .zz_lab_panel p {
+            margin: 0;
+            color: var(--zz_bone_dim);
+            font-size: 13px;
+        }
+
+        .zz_control {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .zz_control_row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .zz_control_output {
+            color: var(--zz_clay);
+            font-family: var(--zz_display);
+            font-size: 20px;
+            letter-spacing: 0.04em;
+        }
+
+        .zz_range {
+            width: 100%;
+            height: 22px;
+            margin: 0;
+            background: transparent;
+            accent-color: var(--zz_clay);
+            cursor: pointer;
+        }
+
+        .zz_hint {
+            color: var(--zz_sage);
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .zz_code_block {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 26px;
+            margin-top: 30px;
+        }
+
+        .zz_code {
+            margin: 0;
+            padding: 26px 28px;
+            overflow-x: auto;
+            color: var(--zz_bone);
+            background: var(--zz_night_soft);
+            border: 1px solid var(--zz_line);
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .zz_code .zz_tag {
+            color: #d9a184;
+        }
+
+        .zz_code .zz_attr {
+            color: var(--zz_sage);
+        }
+
+        .zz_code_note {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .zz_code_note p {
+            margin: 0;
+            color: var(--zz_bone_dim);
+            font-size: 13px;
+        }
+
+        .zz_code_note strong {
+            display: block;
+            margin-bottom: 8px;
+            font-family: var(--zz_display);
+            font-size: 21px;
+            font-weight: 400;
+        }
+
+        .zz_link_line {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--zz_clay);
+            color: var(--zz_clay);
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .zz_footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 84px;
+            padding: 24px 0 34px;
+            border-top: 1px solid var(--zz_line);
+            color: var(--zz_bone_dim);
+            font-size: 12px;
+        }
+
+        .zz_footer b {
+            font-family: var(--zz_display);
+            font-weight: 400;
+            letter-spacing: 0.14em;
+        }
+
+        .zz_reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        .zz_reveal.zz_visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 980px) {
+            .zz_hero {
+                grid-template-columns: minmax(0, 1fr);
+                padding-top: 48px;
+            }
+
+            .zz_seal {
+                display: none;
+            }
+
+            .zz_grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .zz_lab,
+            .zz_code_block {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .zz_topbar,
+            main,
+            .zz_footer {
+                width: calc(100% - 30px);
+            }
+
+            .zz_topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .zz_topnav span:first-child {
+                display: none;
+            }
+
+            .zz_section_head {
+                grid-template-columns: 56px minmax(0, 1fr);
+            }
+
+            .zz_section_head p {
+                grid-column: 2;
+            }
+
+            .zz_grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .zz_band {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 14px;
+                letter-spacing: 0.2em;
+            }
+
+            .zz_footer {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 60px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .zz_seal_ring {
+                animation: none;
+            }
+
+            .zz_reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="zz_page">
+    <header class="zz_topbar">
+        <a class="zz_brand" href="index.html" aria-label="返回课程首页">
+            <span class="zz_brand_seal">L</span>
+            <span class="zz_brand_text">
+                <strong>LINE ATELIER</strong>
+                <em>线性图标 · 标本 NO.02</em>
+            </span>
+        </a>
+        <nav class="zz_topnav" aria-label="页面导航">
+            <span>Lucide / SVG</span>
+            <a class="zz_back" href="index.html">← 返回首页</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="zz_hero" aria-labelledby="zz_hero_title">
+            <div>
+                <div class="zz_hero_kicker">
+                    <span>Advanced Web Design</span>
+                    <span>SVG Icon / Inline System</span>
+                </div>
+                <h1 class="zz_hero_title" id="zz_hero_title">
+                    <span class="zz_title_line">LINE</span>
+                    <span class="zz_title_line zz_title_line--outline">ATELIER</span>
+                </h1>
+                <p class="zz_hero_lede">这一页没有字体文件。每个图标都是一段可被读取的 SVG 路径，线条粗细、颜色与尺寸都能在运行时被重新书写，像设计稿上不断调整的描边。</p>
+                <div class="zz_hero_meta">
+                    <div class="zz_meta_item">
+                        <strong>1,500+</strong>
+                        <span>Open Icons</span>
+                    </div>
+                    <div class="zz_meta_item">
+                        <strong>24</strong>
+                        <span>On Display</span>
+                    </div>
+                    <div class="zz_meta_item">
+                        <strong>24px</strong>
+                        <span>Stroke Grid</span>
+                    </div>
+                </div>
+            </div>
+            <div class="zz_seal" aria-hidden="true">
+                <div class="zz_seal_ring"></div>
+                <div class="zz_seal_core">
+                    <i class="zz_icon" data-lucide="pen-tool"></i>
+                    <span>SVG / 02</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="zz_band" aria-hidden="true">
+            <span>Path · Stroke · Join</span>
+            <i class="zz_icon" data-lucide="feather"></i>
+            <i class="zz_icon" data-lucide="compass"></i>
+            <span>Every Line Is Editable</span>
+            <i class="zz_icon" data-lucide="palette"></i>
+            <i class="zz_icon" data-lucide="atom"></i>
+            <span>Scalable Without Code</span>
+        </div>
+
+        <section class="zz_section" id="zz_gallery" aria-labelledby="zz_gallery_title">
+            <div class="zz_section_head zz_reveal">
+                <span class="zz_index">01</span>
+                <h2 id="zz_gallery_title">线性陈列 / Gallery</h2>
+                <p>二十四个 Lucide 图标。悬停时描边转为陶土色，四角标记浮现，像被选中的画框。</p>
+            </div>
+            <div class="zz_grid">
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="feather"></i>
+                    <div class="zz_card_meta"><b>feather</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="compass"></i>
+                    <div class="zz_card_meta"><b>compass</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="pen-tool"></i>
+                    <div class="zz_card_meta"><b>pen-tool</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="palette"></i>
+                    <div class="zz_card_meta"><b>palette</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="layers"></i>
+                    <div class="zz_card_meta"><b>layers</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="atom"></i>
+                    <div class="zz_card_meta"><b>atom</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="wand-sparkles"></i>
+                    <div class="zz_card_meta"><b>wand-sparkles</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="hourglass"></i>
+                    <div class="zz_card_meta"><b>hourglass</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="infinity"></i>
+                    <div class="zz_card_meta"><b>infinity</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="scissors"></i>
+                    <div class="zz_card_meta"><b>scissors</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="box"></i>
+                    <div class="zz_card_meta"><b>box</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="leaf"></i>
+                    <div class="zz_card_meta"><b>leaf</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="zap"></i>
+                    <div class="zz_card_meta"><b>zap</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="fish"></i>
+                    <div class="zz_card_meta"><b>fish</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="bird"></i>
+                    <div class="zz_card_meta"><b>bird</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="gem"></i>
+                    <div class="zz_card_meta"><b>gem</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="clock"></i>
+                    <div class="zz_card_meta"><b>clock</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="mail"></i>
+                    <div class="zz_card_meta"><b>mail</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="map"></i>
+                    <div class="zz_card_meta"><b>map</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="heart"></i>
+                    <div class="zz_card_meta"><b>heart</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="github"></i>
+                    <div class="zz_card_meta"><b>github</b><small>brand line</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="figma"></i>
+                    <div class="zz_card_meta"><b>figma</b><small>brand line</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="camera"></i>
+                    <div class="zz_card_meta"><b>camera</b><small>stroke 24</small></div>
+                </article>
+                <article class="zz_card zz_reveal">
+                    <i class="zz_icon" data-lucide="music"></i>
+                    <div class="zz_card_meta"><b>music</b><small>stroke 24</small></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="zz_section" id="zz_lab" aria-labelledby="zz_lab_title">
+            <div class="zz_section_head zz_reveal">
+                <span class="zz_index">02</span>
+                <h2 id="zz_lab_title">描边实验 / Stroke Lab</h2>
+                <p>SVG 的属性可以被实时改写。拖动滑杆，整页图标的描边粗细会一起变化。</p>
+            </div>
+            <div class="zz_lab">
+                <div class="zz_lab_stage zz_reveal">
+                    <i class="zz_icon" data-lucide="compass"></i>
+                </div>
+                <div class="zz_lab_panel zz_reveal">
+                    <div>
+                        <h3>stroke-width</h3>
+                        <p>同一段路径，线条越细越接近制图稿，越粗越接近海报的块面语言。</p>
+                    </div>
+                    <div class="zz_control">
+                        <div class="zz_control_row">
+                            <span>Thin</span>
+                            <output class="zz_control_output" id="zz_sw_output" for="zz_sw_range">1.5</output>
+                            <span>Bold</span>
+                        </div>
+                        <input class="zz_range" id="zz_sw_range" type="range" min="0.5" max="3" step="0.25" value="1.5" aria-label="调整图标描边宽度">
+                        <span class="zz_hint">所有图标同步更新 · 无需重新渲染</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="zz_section" id="zz_code" aria-labelledby="zz_code_title">
+            <div class="zz_section_head zz_reveal">
+                <span class="zz_index">03</span>
+                <h2 id="zz_code_title">写法 / Usage</h2>
+                <p>先用 data-lucide 标记图标名，再由本地脚本把它替换成内联 SVG。</p>
+            </div>
+            <div class="zz_code_block">
+                <pre class="zz_code zz_reveal"><code><span class="zz_tag">&lt;script</span> <span class="zz_attr">src</span>="cdn/lucide/lucide.min.js"<span class="zz_tag">&gt;&lt;/script&gt;</span>
+
+<span class="zz_tag">&lt;i</span> <span class="zz_attr">data-lucide</span>="feather"<span class="zz_tag">&gt;&lt;/i&gt;</span>
+
+<span class="zz_tag">&lt;script&gt;</span>
+  lucide.createIcons();
+<span class="zz_tag">&lt;/script&gt;</span></code></pre>
+                <div class="zz_code_note zz_reveal">
+                    <div>
+                        <strong>SVG 图标的三件套</strong>
+                        <p>一个图标名称、一个本地脚本、一次 createIcons()。渲染结果是可被 CSS 直接控制的内联 SVG，颜色、描边与尺寸都随样式变化。</p>
+                    </div>
+                    <a class="zz_link_line" href="iconfont-1.html">← 切换到 Font Awesome · 字体版</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="zz_footer">
+        <b>LINE ATELIER / LUCIDE</b>
+        <span>朱禹同 · 高级网页设计 · SVG 图标标本 No.02</span>
+    </footer>
+
+    <script src="cdn/lucide/lucide.min.js"></script>
+    <script>
+        (function () {
+            lucide.createIcons();
+
+            var zz_root = document.documentElement;
+            var zz_range = document.getElementById("zz_sw_range");
+            var zz_output = document.getElementById("zz_sw_output");
+
+            zz_range.addEventListener("input", function () {
+                var zz_value = zz_range.value;
+                zz_root.style.setProperty("--zz_sw", zz_value);
+                zz_output.textContent = zz_value;
+            });
+
+            var zz_revealItems = document.querySelectorAll(".zz_reveal");
+            var zz_reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (zz_reduceMotion || !("IntersectionObserver" in window)) {
+                zz_revealItems.forEach(function (zz_item) {
+                    zz_item.classList.add("zz_visible");
+                });
+                return;
+            }
+
+            var zz_observer = new IntersectionObserver(function (zz_entries) {
+                zz_entries.forEach(function (zz_entry) {
+                    if (zz_entry.isIntersecting) {
+                        var zz_delay = Array.prototype.indexOf.call(zz_revealItems, zz_entry.target) % 8;
+                        zz_entry.target.style.transitionDelay = zz_delay * 55 + "ms";
+                        zz_entry.target.classList.add("zz_visible");
+                        zz_observer.unobserve(zz_entry.target);
+                    }
+                });
+            }, { threshold: 0.16, rootMargin: "0px 0px -40px 0px" });
+
+            zz_revealItems.forEach(function (zz_item) {
+                zz_observer.observe(zz_item);
+            });
+        })();
+    </script>
+</body>
+</html>
