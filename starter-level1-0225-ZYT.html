@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学生成绩分析面板 · 目标效果</title>
+<style>
+  :root {
+    --zz-bg: #1b2231;
+    --zz-ink: #232a3a;
+    --zz-line: #eef0f5;
+    --zz-soft: #f6f7fb;
+    --zz-indigo: #5b6cf0;
+    --zz-teal: #2fd3b5;
+    --zz-gold: #f5b942;
+    --zz-red: #e5524f;
+    --zz-mono: "Consolas", "SFMono-Regular", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 34px 8% 30px;
+    background: radial-gradient(circle at 50% 0%, #242d40 0%, var(--zz-bg) 46%);
+    color: var(--zz-ink);
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    line-height: 1.5;
+  }
+
+  .zz_page { width: min(1500px, 100%); margin: 0 auto; }
+
+  /* 顶部标题卡 */
+  .zz_panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f9fbfd, #edf0f6);
+    box-shadow: 0 10px 30px rgba(9, 14, 24, .28);
+  }
+
+  .zz_head-left { display: flex; align-items: center; gap: 14px; }
+
+  .zz_logo {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: 12px;
+    background: linear-gradient(140deg, #3ecbb6, #1f9d8c);
+    box-shadow: 0 6px 14px rgba(31, 157, 140, .3);
+  }
+
+  .zz_logo svg { width: 25px; height: 25px; }
+
+  .zz_title { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: .01em; }
+
+  .zz_subtitle { margin: 0; color: #4f5a70; font-size: 12px; font-weight: 500; white-space: nowrap; }
+
+  .zz_badge {
+    padding: 5px 13px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #5b6cf7;
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .zz_head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+
+  /* 分区卡片 */
+  .zz_section {
+    margin-bottom: 14px;
+    padding: 16px 20px 20px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(9, 14, 24, .16);
+  }
+
+  .zz_section-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+
+  .zz_bar { width: 3px; height: 14px; border-radius: 2px; background: #2bb3a3; }
+
+  .zz_bar--indigo { background: #5b6cf0; }
+
+  .zz_section-title { margin: 0; font-size: 15px; font-weight: 700; }
+
+  .zz_code {
+    color: #a4aebd;
+    font-family: var(--zz-mono);
+    font-size: 11px;
+    letter-spacing: .01em;
+  }
+
+  /* 班级概览 */
+  .zz_stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  .zz_stat { padding: 12px 16px; border-radius: 10px; background: var(--zz-soft); }
+
+  .zz_num { display: block; font-size: 26px; font-weight: 700; line-height: 1.15; }
+
+  .zz_num--blue { color: #4d7cf3; }
+
+  .zz_num--green { color: #14b892; }
+
+  .zz_num--amber { color: #f0a020; }
+
+  .zz_stat-label { display: block; margin-top: 2px; color: #66718a; font-size: 12px; font-weight: 500; }
+
+  /* 数据操作 */
+  .zz_tools { display: flex; align-items: center; gap: 8px; }
+
+  .zz_search { position: relative; flex: 1; display: block; }
+
+  .zz_search-ico {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .zz_search input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px 0 36px;
+    border: 1px solid #e7eaf0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2733;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+
+  .zz_search input:focus { border-color: #9fb0f5; box-shadow: 0 0 0 3px rgba(91, 108, 240, .12); }
+
+  .zz_search input::placeholder { color: #8d97aa; }
+
+  .zz_btn-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+    border-radius: 10px;
+    background: #eef1f7;
+  }
+
+  .zz_sort-btn,
+  .zz_filter {
+    border: none;
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 7px;
+    color: #5b6472;
+    font: inherit;
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .18s;
+  }
+
+  .zz_sort-btn:hover,
+  .zz_filter:hover { color: #5b7cfa; }
+
+  .zz_sort-btn.is-active,
+  .zz_filter.is-active {
+    background: #fff;
+    color: #5b7cfa;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(20, 28, 48, .12);
+  }
+
+  /* 榜单与预警 */
+  .zz_alert {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #fdf1f2;
+    color: #b23f45;
+    font-size: 12.5px;
+  }
+
+  .zz_alert-ico { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; }
+
+  .zz_board { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+  .zz_board-col { padding: 12px 14px; border: 1px solid var(--zz-line); border-radius: 10px; background: #fdfdff; }
+
+  .zz_col-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #2b3242;
+  }
+
+  .zz_dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .zz_dot--red { background: #ef6b5f; }
+
+  .zz_fail { list-style: none; margin: 0; padding: 0; }
+
+  .zz_fail li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    font-size: 12.5px;
+    color: #323a4c;
+  }
+
+  .zz_fail-score { margin-left: auto; color: var(--zz-red); font-weight: 700; }
+
+  /* 学生成绩卡片 */
+  .zz_cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .zz_card {
+    padding: 14px 16px;
+    border: 1px solid var(--zz-line);
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+  }
+
+  .zz_card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(23, 32, 52, .08); }
+
+  .zz_card.is-active { border-color: #aab6f5; box-shadow: 0 0 0 3px rgba(91, 108, 240, .12); }
+
+  .zz_card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+  .zz_avatar {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .zz_avatar--boy { background: linear-gradient(135deg, #5b7cfa, #7a5bfa); }
+
+  .zz_avatar--girl { background: linear-gradient(135deg, #ff5d8f, #ff8fb1); }
+
+  .zz_card-info { display: flex; min-width: 0; flex-direction: column; line-height: 1.35; }
+
+  .zz_card-info b { color: #1f2733; font-size: 15px; font-weight: 700; }
+
+  .zz_card-info i { color: #5b6472; font-size: 12px; font-style: normal; }
+
+  .zz_rank {
+    margin-left: auto;
+    padding: 3px 9px;
+    flex: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .zz_rank--gold { background: #f5b945; }
+
+  .zz_rank--blue { background: #5b7cfa; }
+
+  .zz_score-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 10px 0; }
+
+  .zz_score {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1px;
+    padding: 6px 2px;
+    border-radius: 8px;
+    background: #f6f8ff;
+    color: #1f2733;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .zz_score em { color: #5b6472; font-size: 11px; font-weight: 400; font-style: normal; }
+
+  .zz_score--fail { color: #ff7a59; }
+
+  .zz_score--full { color: #21d4b4; }
+
+  .zz_card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
+    padding-top: 8px;
+    border-top: 1px dashed #e7eaf0;
+    font-size: 13px;
+  }
+
+  .zz_total { color: #5b7cfa; font-weight: 800; }
+
+  .zz_avg-text { color: #5b6472; font-weight: 400; }
+
+  .zz_empty { margin: 0; padding: 18px 0; color: #7b8598; font-size: 12.5px; text-align: center; }
+
+  .zz_footer { padding-top: 16px; color: #7d8ba0; font-size: 12px; text-align: center; }
+
+  @media (max-width: 860px) {
+    .zz_stats { grid-template-columns: repeat(2, 1fr); }
+    .zz_cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 580px) {
+    .zz_panel-head { align-items: flex-start; flex-direction: column; }
+    .zz_cards { grid-template-columns: 1fr; }
+    .zz_tools { flex-wrap: wrap; }
+    .zz_search { flex-basis: 100%; }
+  }
+</style>
+</head>
+<body>
+  <div class="zz_page">
+    <header class="zz_panel-head">
+      <div class="zz_head-left">
+        <span class="zz_logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M5.5 19.5V11"></path>
+            <path d="M12 19.5V4.5"></path>
+            <path d="M18.5 19.5V8"></path>
+          </svg>
+        </span>
+        <div>
+          <h1 class="zz_title">学生成绩分析面板</h1>
+        </div>
+      </div>
+      <div class="zz_head-right">
+        <span class="zz_badge">等级二·目标效果</span>
+        <p class="zz_subtitle">DOM 查找 × 数组方法 × 函数 综合实战</p>
+      </div>
+    </header>
+
+    <!-- 班级概览 -->
+    <section class="zz_section">
+      <div class="zz_section-head">
+        <span class="zz_bar"></span>
+        <h2 class="zz_section-title">班级概览</h2>
+        <span class="zz_code">getElementById / reduce / map / forEach</span>
+      </div>
+      <div class="zz_stats">
+        <div class="zz_stat">
+          <b class="zz_num zz_num--blue" id="zz_count">0</b>
+          <span class="zz_stat-label">班级人数（人）</span>
+        </div>
+        <div class="zz_stat">
+          <b class="zz_num zz_num--green" id="zz_sum">0</b>
+          <span class="zz_stat-label">班级总分</span>
+        </div>
+        <div class="zz_stat">
+          <b class="zz_num zz_num--amber" id="zz_avg">0</b>
+          <span class="zz_stat-label">班级平均分</span>
+        </div>
+        <div class="zz_stat">
+          <b class="zz_num zz_num--amber" id="zz_rate">0%</b>
+          <span class="zz_stat-label">及格率（无不及格科目）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数据操作 -->
+    <section class="zz_section">
+      <div class="zz_section-head">
+        <span class="zz_bar zz_bar--indigo"></span>
+        <h2 class="zz_section-title">数据操作</h2>
+        <span class="zz_code">filter / sort / querySelectorAll / classList / 事件委托</span>
+      </div>
+      <div class="zz_tools" id="zz_tools">
+        <label class="zz_search">
+          <span class="zz_search-ico">🔍</span>
+          <input id="zz_search" type="search" placeholder="按姓名或学号搜索…">
+        </label>
+        <div class="zz_btn-group" id="zz_sort-group">
+          <button class="zz_sort-btn is-active" type="button" data-zz-sort="total">按总分↓</button>
+          <button class="zz_sort-btn" type="button" data-zz-sort="id">按学号↑</button>
+        </div>
+        <div class="zz_btn-group" id="zz_filters">
+          <button class="zz_filter is-active" type="button" data-zz-filter="all">全部</button>
+          <button class="zz_filter" type="button" data-zz-filter="excellent">优秀</button>
+          <button class="zz_filter" type="button" data-zz-filter="fail">含不及格</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 榜单与预警 -->
+    <section class="zz_section">
+      <div class="zz_section-head">
+        <span class="zz_bar zz_bar--indigo"></span>
+        <h2 class="zz_section-title">榜单与预警</h2>
+        <span class="zz_code">filter / sort / map / reduce / 节点关系</span>
+      </div>
+      <div class="zz_alert">
+        <svg class="zz_alert-ico" viewBox="0 0 24 24"><path d="M12 4.5 20 19.5H4z"></path><path d="M12 10v4"></path><path d="M12 17h.01"></path></svg>
+        <span>班级中存在不及格科目，请关注预警名单中的学生。</span>
+      </div>
+      <div class="zz_board">
+        <div class="zz_board-col">
+          <div class="zz_col-head"><span class="zz_dot zz_dot--red"></span>不及格预警</div>
+          <ul class="zz_fail" id="zz_fail"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学生成绩卡片 -->
+    <section class="zz_section">
+      <div class="zz_section-head">
+        <span class="zz_bar"></span>
+        <h2 class="zz_section-title">学生成绩卡片</h2>
+        <span class="zz_code">forEach / createElement / classList / closest / 节点关系 / 事件委托</span>
+      </div>
+      <div class="zz_cards" id="zz_cards"></div>
+    </section>
+
+    <footer class="zz_footer">高级网页设计课堂实践任务 · 目标效果（target.html）</footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    (function () {
+      const zz_subjects = window.SUBJECTS;
+      const zz_students = window.STUDENTS;
+
+      const zz_byId = function (zz_id) {
+        return document.getElementById(zz_id);
+      };
+      const zz_getTotal = function (zz_stu) {
+        return zz_subjects.reduce(function (zz_acc, zz_sub) {
+          return zz_acc + zz_stu[zz_sub.key];
+        }, 0);
+      };
+      const zz_getAvg = function (zz_stu) {
+        return zz_getTotal(zz_stu) / zz_subjects.length;
+      };
+      const zz_hasFail = function (zz_stu) {
+        return zz_subjects.some(function (zz_sub) {
+          return zz_stu[zz_sub.key] < 60;
+        });
+      };
+      const zz_fmtAvg = function (zz_num) {
+        return String(Number(zz_num.toFixed(1)));
+      };
+
+      // ① 班级概览
+      function zz_renderOverview() {
+        const zz_n = zz_students.length;
+        const zz_sum = zz_students.reduce(function (zz_acc, zz_stu) {
+          return zz_acc + zz_getTotal(zz_stu);
+        }, 0);
+        const zz_avg = Math.round(zz_sum / (zz_n * zz_subjects.length));
+        const zz_passCount = zz_students.filter(function (zz_stu) {
+          return !zz_hasFail(zz_stu);
+        }).length;
+        const zz_rate = Math.round(zz_passCount / zz_n * 100) + "%";
+
+        zz_byId("zz_count").textContent = zz_n;
+        zz_byId("zz_sum").textContent = zz_sum;
+        zz_byId("zz_avg").textContent = zz_avg;
+        zz_byId("zz_rate").textContent = zz_rate;
+      }
+
+      // ② 榜单与预警
+      function zz_renderBoard() {
+        // 不及格预警：按总分降序
+        const zz_fails = zz_students.filter(zz_hasFail).sort(function (zz_a, zz_b) {
+          return zz_getTotal(zz_b) - zz_getTotal(zz_a);
+        });
+
+        zz_byId("zz_fail").innerHTML = zz_fails.map(function (zz_stu) {
+          const zz_failNames = zz_subjects.filter(function (zz_sub) {
+            return zz_stu[zz_sub.key] < 60;
+          }).map(function (zz_sub) {
+            return zz_sub.name;
+          }).join("、");
+          return "<li><span>" + zz_stu.name + "（" + zz_failNames + "）</span>" +
+            '<b class="zz_fail-score">' + zz_getTotal(zz_stu) + "分</b></li>";
+        }).join("");
+      }
+
+      // ④ 数据操作状态 + 过滤排序
+      const zz_state = { keyword: "", sort: "total", filter: "all" };
+
+      function zz_getVisibleList() {
+        const zz_kw = zz_state.keyword.trim().toLowerCase();
+        const zz_list = zz_students.filter(function (zz_stu) {
+          const zz_hitKeyword = !zz_kw || zz_stu.name.toLowerCase().indexOf(zz_kw) > -1 || zz_stu.id.indexOf(zz_kw) > -1;
+          if (!zz_hitKeyword) return false;
+          if (zz_state.filter === "excellent") return zz_getAvg(zz_stu) >= 85;
+          if (zz_state.filter === "fail") return zz_hasFail(zz_stu);
+          return true;
+        });
+
+        if (zz_state.sort === "id") {
+          return zz_list.slice().sort(function (zz_a, zz_b) {
+            return zz_a.id.localeCompare(zz_b.id);
+          });
+        }
+        return zz_list.slice().sort(function (zz_a, zz_b) {
+          return zz_getTotal(zz_b) - zz_getTotal(zz_a);
+        });
+      }
+
+      // ⑤ 学生成绩卡片
+      function zz_renderCards(zz_list) {
+        const zz_wrap = zz_byId("zz_cards");
+        zz_wrap.innerHTML = "";
+
+        if (!zz_list.length) {
+          zz_wrap.innerHTML = '<p class="zz_empty">没有找到匹配的学生，换个关键词试试。</p>';
+          return;
+        }
+
+        zz_list.forEach(function (zz_stu, zz_idx) {
+          const zz_rank = zz_idx + 1;
+          const zz_total = zz_getTotal(zz_stu);
+          const zz_avg = zz_fmtAvg(zz_total / zz_subjects.length);
+          const zz_rankClass = zz_rank <= 3 ? "zz_rank--gold" : "zz_rank--blue";
+
+          const zz_scoreHtml = zz_subjects.map(function (zz_sub) {
+            const zz_score = zz_stu[zz_sub.key];
+            const zz_class = zz_score < 60 ? "zz_score zz_score--fail" : zz_score === 100 ? "zz_score zz_score--full" : "zz_score";
+            return '<span class="' + zz_class + '"><em>' + zz_sub.abbr + "</em>" + zz_score + "</span>";
+          }).join("");
+
+          const zz_card = document.createElement("article");
+          zz_card.className = "zz_card";
+          zz_card.dataset.zzId = zz_stu.id;
+          zz_card.innerHTML =
+            '<div class="zz_card-head">' +
+              '<span class="zz_avatar ' + (zz_stu.gender === "男" ? "zz_avatar--boy" : "zz_avatar--girl") + '">' + zz_stu.name.charAt(0) + "</span>" +
+              '<span class="zz_card-info"><b>' + zz_stu.name + "</b><i>" + zz_stu.id + " · " + zz_stu.gender + "</i></span>" +
+              '<span class="zz_rank ' + zz_rankClass + '">第' + zz_rank + "名</span>" +
+            "</div>" +
+            '<div class="zz_score-row">' + zz_scoreHtml + "</div>" +
+            '<div class="zz_card-foot"><span class="zz_total">总分 ' + zz_total + "</span>" +
+            '<span class="zz_avg-text">均分 ' + zz_avg + "</span></div>";
+          zz_wrap.appendChild(zz_card);
+        });
+      }
+
+      function zz_refreshView() {
+        const zz_list = zz_getVisibleList();
+        zz_renderCards(zz_list);
+      }
+
+      // ⑥ 绑定交互（事件委托）
+      function zz_bindEvents() {
+        zz_byId("zz_search").addEventListener("input", function (zz_event) {
+          zz_state.keyword = zz_event.target.value;
+          zz_refreshView();
+        });
+
+        zz_byId("zz_tools").addEventListener("click", function (zz_event) {
+          const zz_btn = zz_event.target.closest(".zz_sort-btn");
+          if (!zz_btn) return;
+          zz_state.sort = zz_btn.dataset.zzSort;
+          zz_byId("zz_tools").querySelectorAll(".zz_sort-btn").forEach(function (zz_item) {
+            zz_item.classList.toggle("is-active", zz_item === zz_btn);
+          });
+          zz_refreshView();
+        });
+
+        zz_byId("zz_filters").addEventListener("click", function (zz_event) {
+          const zz_btn = zz_event.target.closest(".zz_filter");
+          if (!zz_btn) return;
+          zz_state.filter = zz_btn.dataset.zzFilter;
+          zz_byId("zz_filters").querySelectorAll(".zz_filter").forEach(function (zz_item) {
+            zz_item.classList.toggle("is-active", zz_item === zz_btn);
+          });
+          zz_refreshView();
+        });
+
+        zz_byId("zz_cards").addEventListener("click", function (zz_event) {
+          const zz_card = zz_event.target.closest(".zz_card");
+          if (!zz_card) return;
+          zz_byId("zz_cards").querySelectorAll(".zz_card").forEach(function (zz_item) {
+            zz_item.classList.remove("is-active");
+          });
+          zz_card.classList.add("is-active");
+        });
+      }
+
+      zz_renderOverview();
+      zz_renderBoard();
+      zz_refreshView();
+      zz_bindEvents();
+    })();
+  </script>
+</body>
+</html>
